@@ -21,7 +21,7 @@ RUN cd $HOME && \
     cd $HOME
 RUN $JBOSS_HOME/bin/add-user.sh admin P@ssw0rd10 --silent
 ADD postgresql-9-4-1208.jar $JBOSS_HOME/bin/standalone/deployments
-ADD 
+ADD ojdbc6.jar $JBOSS_HOME/bin/standalone/deployments
 
 # Ensure signals are forwarded to the JVM process correctly for graceful shutdown
 ENV LAUNCH_JBOSS_IN_BACKGROUND true
