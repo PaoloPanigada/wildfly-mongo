@@ -39,6 +39,6 @@ EXPOSE 8080 9990
 #: For systemd usage this changes to /usr/sbin/init
 # Keeping it as /bin/bash for compatability with previous
 CMD ["/opt/jboss/wildfly/10.0.0/bin/standalone.sh", "-b", "0.0.0.0"]
-RUN /opt/jboss/wildfly/10.0.0/bin/jboss-cli.sh --connect --controller=localhost:9990 &&\
+RUN /opt/jboss/wildfly/10.0.0/bin/jboss-cli.sh --connect --controller=127.0.0.1:9990 &&\
     data-source add --name=mongoDB --jndi-name=java:/mongoDB --driver-name=mongodb.jdbc.MongoDriver --connectionurl=jdbc:mongo://mongodb.jarvis-sit.svc/jarvisoak --user-name=oak --password=password
 
