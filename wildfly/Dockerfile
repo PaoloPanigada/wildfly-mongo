@@ -16,7 +16,7 @@ RUN cd $HOME && \
     mkdir -p $JBOSS_HOME && \
     mv $HOME/wildfly-$WILDFLY_VERSION/* $JBOSS_HOME && \
     rm wildfly-$WILDFLY_VERSION.tar.gz && \
-    $JBOSS_HOME/bin/add-user.sh admin P@ssw0rd10 --silent
+    #$JBOSS_HOME/bin/add-user.sh admin P@ssw0rd10 --silent
 ADD mongojdbc1.2.jar $JBOSS_HOME/bin/standalone/deployments
     
 # Ensure signals are forwarded to the JVM process correctly for graceful shutdown
