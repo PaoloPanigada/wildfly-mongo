@@ -9,7 +9,7 @@ ENV JBOSS_HOME /opt/jboss/wildfly/10.0.0
 # Make sure the distribution is available from a well-known place
 
 RUN cd $HOME && \
-    yum install tar jdk zip unzip wget curl -y && \
+    yum install tar java jdk zip unzip wget curl -y && \
     curl -O https://download.jboss.org/wildfly/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.tar.gz && \
     sha1sum wildfly-$WILDFLY_VERSION.tar.gz | grep $WILDFLY_SHA1 && \
     tar zxvf wildfly-$WILDFLY_VERSION.tar.gz && \
