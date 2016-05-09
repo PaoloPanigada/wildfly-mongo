@@ -24,6 +24,8 @@ RUN cd $HOME && \
     mv keycloak-distro-overlay.tar.gz $JBOSS_HOME/. && \
     cd $JBOSS_HOME && \
     tar zxvf keycloak-distro-overlay.tar.gz && \
+    wget http://govrepolx01.siav.net/artifactory/arch-snapshot-local/it/siav/arch.showcase.fe.web/0.0.1-SNAPSHOT/arch.showcase.fe.web-0.0.1-20160509.143519-1.war && \
+    mv arch.showcase.fe.web-0.0.1-20160509.143519-1.war $JBOSS_HOME/standalone/deployments && \
     cd $HOME
 RUN $JBOSS_HOME/bin/add-user.sh admin P@ssw0rd10 --silent
 ADD mongojdbc1.2.jar $JBOSS_HOME/bin/standalone/deployments
