@@ -4,7 +4,6 @@ FROM centos:latest
 ENV WILDFLY_VERSION 10.0.0.Final
 ENV WILDFLY_SHA1 c0dd7552c5207b0d116a9c25eb94d10b4f375549
 ENV JBOSS_HOME /opt/jboss/wildfly/10.0.0
-ENV JB_CON wildfly-mongo.jarvis-sit.svc
 
 # Add the WildFly distribution to /opt, and make wildfly the owner of the extracted tar content
 # Make sure the distribution is available from a well-known place
@@ -17,20 +16,13 @@ RUN cd $HOME && \
     mkdir -p $JBOSS_HOME && \
     mv $HOME/wildfly-$WILDFLY_VERSION/* $JBOSS_HOME && \
     rm wildfly-$WILDFLY_VERSION.tar.gz && \
-    wget "http://downloads.jboss.org/apiman/1.2.3.Final/apiman-distro-wildfly10-1.2.3.Final-overlay.zip" && \
-    mv apiman-distro-wildfly10-1.2.3.Final-overlay.zip apiman-distro-overlay.zip && \
-    unzip -o apiman-distro-overlay.zip -d $JBOSS_HOME && \
-    wget "http://downloads.jboss.org/keycloak/1.9.4.Final/keycloak-1.9.4.Final.tar.gz" && \
-    mv keycloak-1.9.4.Final.tar.gz keycloak-distro-overlay.tar.gz && \
-    mv keycloak-distro-overlay.tar.gz $JBOSS_HOME/. && \
-    cd $JBOSS_HOME && \
-    tar zxvf keycloak-distro-overlay.tar.gz && \
     wget http://govrepolx01.siav.net/artifactory/arch-snapshot-local/it/siav/arch.showcase.fe.web/0.0.1-SNAPSHOT/arch.showcase.fe.web-0.0.1-20160509.143519-1.war && \
     mv arch.showcase.fe.web-0.0.1-20160509.143519-1.war $JBOSS_HOME/standalone/deployments && \
     cd $HOME
 RUN $JBOSS_HOME/bin/add-user.sh admin P@ssw0rd10 --silent
-ADD mongojdbc1.2.jar $JBOSS_HOME/bin/standalone/deployments
-    
+ADD postgresql-9-4-1208.jar $JBOSS_HOME/bin/standalone/deployments
+ADD 
+
 # Ensure signals are forwarded to the JVM process correctly for graceful shutdown
 ENV LAUNCH_JBOSS_IN_BACKGROUND true
 
@@ -40,6 +32,4 @@ EXPOSE 8080 9990
 #: For systemd usage this changes to /usr/sbin/init
 # Keeping it as /bin/bash for compatability with previous
 CMD ["/opt/jboss/wildfly/10.0.0/bin/standalone.sh", "-b", "0.0.0.0"]
-RUN /opt/jboss/wildfly/10.0.0/bin/jboss-cli.sh --connect --controller=$JB_CON:9990 &&\
-    data-source add --name=mongoDB --jndi-name=java:/mongoDB --driver-name=mongodb.jdbc.MongoDriver --connectionurl=jdbc:mongo://mongodb.jarvis-sit.svc/jarvisoak --user-name=oak --password=password
 
