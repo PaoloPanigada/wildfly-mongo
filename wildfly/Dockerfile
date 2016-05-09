@@ -11,6 +11,7 @@ ENV JBOSS_HOME /opt/jboss/wildfly/10.0.0
 RUN cd $HOME && \
     curl -O https://download.jboss.org/wildfly/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.tar.gz && \
     sha1sum wildfly-$WILDFLY_VERSION.tar.gz | grep $WILDFLY_SHA1 && \
+    yum install tar -y && \
     tar xf wildfly-$WILDFLY_VERSION.tar.gz && \
     mkdir -p $JBOSS_HOME && \
     mv $HOME/wildfly-$WILDFLY_VERSION/* $JBOSS_HOME && \
