@@ -18,10 +18,12 @@ RUN cd $HOME && \
     rm wildfly-$WILDFLY_VERSION.tar.gz && \
     wget http://govrepolx01.siav.net/artifactory/arch-snapshot-local/it/siav/arch.showcase.fe.web/0.0.1-SNAPSHOT/arch.showcase.fe.web-0.0.1-20160509.143519-1.war && \
     mv arch.showcase.fe.web-0.0.1-20160509.143519-1.war $JBOSS_HOME/standalone/deployments && \
+    wget http://www.java2s.com/Code/JarDownload/ojdbc6/ojdbc6.jar.zip && \
+    unzip ojdbc6.jar.zip && \
+    mv ojdbc6.jar $JBOSS_HOME/standalone/deployments && \
     cd $HOME
 RUN $JBOSS_HOME/bin/add-user.sh admin P@ssw0rd10 --silent
 ADD postgresql-9-4-1208.jar $JBOSS_HOME/bin/standalone/deployments
-ADD ojdbc6.jar $JBOSS_HOME/bin/standalone/deployments
 
 # Ensure signals are forwarded to the JVM process correctly for graceful shutdown
 ENV LAUNCH_JBOSS_IN_BACKGROUND true
