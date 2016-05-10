@@ -16,6 +16,7 @@ RUN cd $HOME && \
     wget http://www.java2s.com/Code/JarDownload/ojdbc6/ojdbc6.jar.zip && \
     unzip ojdbc6.jar.zip && \
     mv ojdbc6.jar $JBOSS_HOME/standalone/deployments && \
+    sed -i 's/jboss.bind.address.management:127.0.0.1/jboss.bind.address.management:0.0.0.0/g' /wildfly/standalone/configuration/standalone.xml && \
     cd $HOME
 RUN $JBOSS_HOME/bin/add-user.sh admin P@ssw0rd10 --silent
 ADD postgresql-9.4.1208.jar $JBOSS_HOME/standalone/deployments
