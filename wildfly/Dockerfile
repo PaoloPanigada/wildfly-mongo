@@ -11,11 +11,6 @@ ENV JBOSS_HOME /wildfly
 
 RUN cd $HOME && \
     yum install tar java jdk zip unzip wget curl -y && \
-    curl -O https://download.jboss.org/wildfly/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.tar.gz && \
-    tar zxvf wildfly-$WILDFLY_VERSION.tar.gz && \
-    mkdir -p $JBOSS_HOME && \
-    mv $HOME/wildfly-$WILDFLY_VERSION/* $JBOSS_HOME && \
-    rm wildfly-$WILDFLY_VERSION.tar.gz && \
     wget http://govrepolx01.siav.net/artifactory/arch-snapshot-local/it/siav/arch.showcase.fe.web/0.0.1-SNAPSHOT/arch.showcase.fe.web-0.0.1-20160509.143519-1.war && \
     mv arch.showcase.fe.web-0.0.1-20160509.143519-1.war $JBOSS_HOME/standalone/deployments && \
     wget http://www.java2s.com/Code/JarDownload/ojdbc6/ojdbc6.jar.zip && \
